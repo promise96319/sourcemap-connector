@@ -1,0 +1,9 @@
+{
+  "extends": "@antfu",
+  "globals": {
+    "chrome": "readonly"
+  },
+  "rules": {
+    "vue/html-self-closing": "off"
+  }
+}
