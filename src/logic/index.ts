@@ -1,1 +1,1 @@
-export * from './directory-storage'
+export * from './folder-storage'

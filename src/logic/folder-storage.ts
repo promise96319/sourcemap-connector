@@ -1,15 +1,15 @@
-import { computed } from 'vue'
 import { useStorageLocal } from '~/composables/useStorageLocal'
 
 export interface Folder {
   id: string
+  name?: string
   directory: string
   files: string[]
 }
 
-export const folderStorage = useStorageLocal<Folder[]>('source-map-url', [])
+export const folderStorage = useStorageLocal<Folder[]>('source-map-url', [{ id: 'default', directory: '', files: [] }])
 
-export const mapUrlStorage = computed(() => {
+export const getUrlMap = () => {
   const map: Record<string, string> = {}
 
   folderStorage.value.forEach((folder: Folder) => {
@@ -24,4 +24,8 @@ export const mapUrlStorage = computed(() => {
   })
 
   return map
+}
+
+watch(folderStorage, () => {
+  browser.runtime.sendMessage(getUrlMap())
 })

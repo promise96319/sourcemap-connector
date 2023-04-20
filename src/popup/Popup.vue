@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FileItem from './FileItem.vue'
-import type { Folder } from '~/logic/directory-storage.js'
-import { folderStorage } from '~/logic/directory-storage.js'
+import type { Folder } from '~/logic/folder-storage'
+import { folderStorage } from '~/logic/folder-storage'
 
 const handleRemove = (id: string) => {
   folderStorage.value = folderStorage.value.filter(item => id !== item.id)
@@ -32,7 +32,7 @@ const handleAddFolder = () => {
 
     <div class="max-h-500px overflow-auto">
       <template v-for="(item, index) in folderStorage" :key="item.directory">
-        <FileItem :id="item.id" :directory="item.directory" :files="item.files" @change="handleChange"
+        <FileItem :id="item.id" :name="item.name" :directory="item.directory" :files="item.files" @change="handleChange"
           @remove="() => handleRemove(item.id)">
           <template #default>
             目录{{ index + 1 }}

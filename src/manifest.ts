@@ -34,7 +34,6 @@ export async function getManifest() {
     permissions: [
       'webRequest',
       'webRequestBlocking',
-      'fileSystem',
       'tabs',
       'storage',
       'activeTab',

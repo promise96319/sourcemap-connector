@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   directory: {
     type: String,
     required: true,
@@ -15,6 +19,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['change', 'remove'])
 
+const name = ref(props.name)
 const directory = ref(props.directory)
 const files = ref(props.files)
 
@@ -23,7 +28,7 @@ const handleRemove = () => {
 }
 
 const handleChange = () => {
-  emit('change', { id: props.id, directory: directory.value, files: files.value })
+  emit('change', { id: props.id, name: name.value, directory: directory.value, files: files.value })
 }
 
 const handleRemoveFile = (file: string) => {
@@ -48,6 +53,10 @@ const handleUpload = (e: any) => {
       </button>
     </div>
     <div class="mt-2">
+      <div class="flex items-center mt-2">
+        <label>文件夹名称：</label>
+        <input v-model="name" class="b-1 mr-2 flex-1 h-6 p-1" placeholder="请输入名称（可选）" @change="handleChange" />
+      </div>
       <div class="flex items-center mt-2">
         <label>文件夹路径：</label>
         <input v-model="directory" class="b-1 mr-2 flex-1 h-6 p-1" placeholder="请输入文件夹路径" @change="handleChange" />
